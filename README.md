@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/gleb-kosteiko/ecoins-rest-service/tree/master.svg?style=svg)](https://circleci.com/gh/gleb-kosteiko/ecoins-rest-service/tree/master)
+[![CircleCI](https://circleci.com/gh/gleb-kosteiko/ecoins-rest-service.svg?style=svg)](https://circleci.com/gh/gleb-kosteiko/ecoins-rest-service)
 
 # ecoins-rest-service
 
