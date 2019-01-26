@@ -6,8 +6,10 @@
 
 ## How to build and to run:
 ```
-mvn clean package
-mvn spring-boot:run
+mvn clean package spring-boot:run
 ```
-## Swagger documentation page:
+## Local Swagger documentation page:
 http://localhost:8080/api/swagger-ui.html
+
+## Heroku Swagger documentation page:
+https://ecoins-rest.herokuapp.com/api/swagger-ui.html
