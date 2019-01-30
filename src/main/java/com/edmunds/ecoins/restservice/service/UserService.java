@@ -6,10 +6,10 @@ import com.edmunds.ecoins.restservice.model.User;
 import java.util.List;
 
 public interface UserService {
-
     User save(LoginUser user);
     List<User> findAll();
     void delete(String id);
-    User findOne(String username);
+    User update(User user);
+    User findByUsername(String username);
     User findById(String id);
 }

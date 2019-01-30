@@ -38,7 +38,7 @@ public class PublicationController {
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public List<Publication> getAllUserPublications(Principal principal) {
-        return publicationService.findAllForUser(userService.findOne(principal.getName()).getId());
+        return publicationService.findAllForUser(userService.findByUsername(principal.getName()).getId());
     }
 
     @PublicationValid
@@ -61,7 +61,7 @@ public class PublicationController {
     @RequestMapping(method = RequestMethod.POST)
     public Publication createPublication(@Valid @RequestBody Publication publication,
                                          Principal principal) {
-        publication.setUserId(userService.findOne(principal.getName()).getId());
+        publication.setUserId(userService.findByUsername(principal.getName()).getId());
         return publicationService.save(publication);
     }
 

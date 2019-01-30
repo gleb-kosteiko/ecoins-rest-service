@@ -15,3 +15,6 @@ http://localhost:8080/api/swagger-ui.html
 
 ## Heroku Swagger documentation page:
 https://ecoins-rest.herokuapp.com/api/swagger-ui.html
+
+## H2 database host:
+http://51.15.214.126:8082

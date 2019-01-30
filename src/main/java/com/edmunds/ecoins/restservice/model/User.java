@@ -17,11 +17,19 @@ public class User {
     @Column(columnDefinition = "char(32)")
     @GenericGenerator(name = "uuid", strategy = "uuid")
     private String id;
-    @Column
+    @Column(nullable = false, unique = true, length = 45)
     private String username;
     @Column
     @JsonIgnore
     private String encryptedPassword;
+    @Column
+    private String email;
+    @Column
+    private String country;
+    @Column
+    private String city;
+    @Column
+    private Integer coinsCount;
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -48,6 +56,38 @@ public class User {
 
     public void setEncryptedPassword(String encryptedPassword) {
         this.encryptedPassword = encryptedPassword;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Integer getCoinsCount() {
+        return coinsCount;
+    }
+
+    public void setCoinsCount(Integer coinsCount) {
+        this.coinsCount = coinsCount;
     }
 
     public Role getRole() {

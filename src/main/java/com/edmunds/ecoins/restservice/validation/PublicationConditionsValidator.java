@@ -32,7 +32,7 @@ public class PublicationConditionsValidator implements ConstraintValidator<Publi
         if (processedPublication == null) {
             throw new NoSuchElementException("{\"error\":\"There is no publication with such ID.\"}");
         }
-        User currentUser = userService.findOne(principal.getName());
+        User currentUser = userService.findByUsername(principal.getName());
         if (currentUser.getRole() != Role.ADMIN && !processedPublication.getUserId().equals(currentUser.getId())) {
             throw new UserPermissionException();
         }
