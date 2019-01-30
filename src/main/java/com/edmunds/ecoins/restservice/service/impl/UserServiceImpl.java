@@ -53,7 +53,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public User findOne(String username) {
+    public User update(User user) {
+        if (user.getEncryptedPassword() != null) {
+            this.encodePassword(user);
+        }
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -75,5 +84,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         userConfig.setCronSchedule(DEFAULT_CRON_SCHEDULE);
         userConfigRepository.save(userConfig);
         return newUser;
+    }
+
+    private void encodePassword(User user) {
+        user.setEncryptedPassword(bcryptEncoder.encode(user.getEncryptedPassword()));
     }
 }

@@ -32,7 +32,7 @@ public class UserConfigConditionsValidator implements ConstraintValidator<UserCo
         if (oldUserConfig == null) {
             throw new NoSuchElementException("{\"error\":\"There is no userConfig with such ID.\"}");
         }
-        User currentUser = userService.findOne(principal.getName());
+        User currentUser = userService.findByUsername(principal.getName());
         if (currentUser.getRole() != Role.ADMIN && !oldUserConfig.getUserId().equals(currentUser.getId())) {
             throw new UserPermissionException();
         }

@@ -41,7 +41,7 @@ public class UserConfigController {
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(value = "/current", method = RequestMethod.GET)
     public UserConfig getUserConfig(Principal principal) {
-        return userConfigService.findByUserId(userService.findOne(principal.getName()).getId());
+        return userConfigService.findByUserId(userService.findByUsername(principal.getName()).getId());
     }
 
     @UserConfigValid
