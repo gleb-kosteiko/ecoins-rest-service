@@ -1,6 +1,5 @@
 package com.edmunds.ecoins.restservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -18,7 +17,6 @@ public class Publication {
     @GenericGenerator(name = "uuid", strategy = "uuid")
     private String id;
     @Column
-    @JsonIgnore
     private String userId;
     @Column
     @NotBlank
@@ -28,15 +26,8 @@ public class Publication {
     @NotBlank
     @Size (min = 1)
     private String title;
-    @JsonIgnore
     @Column
     private boolean isPublished;
-//    @Column
-//    @CreatedDate
-//    private DateTime createdDate;
-//    @Column
-//    @LastModifiedDate
-//    private DateTime lastModifiedDate;
 
     public String getId() {
         return id;
