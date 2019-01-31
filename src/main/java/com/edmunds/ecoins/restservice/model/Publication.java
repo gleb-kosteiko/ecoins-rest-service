@@ -22,8 +22,21 @@ public class Publication {
     private String userId;
     @Column
     @NotBlank
-    @Size (min = 1, max = 280)
+    @Size (min = 1)
     private String message;
+    @Column
+    @NotBlank
+    @Size (min = 1)
+    private String title;
+    @JsonIgnore
+    @Column
+    private boolean isPublished;
+//    @Column
+//    @CreatedDate
+//    private DateTime createdDate;
+//    @Column
+//    @LastModifiedDate
+//    private DateTime lastModifiedDate;
 
     public String getId() {
         return id;
@@ -47,5 +60,21 @@ public class Publication {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isPublished() {
+        return isPublished;
+    }
+
+    public void setPublished(boolean published) {
+        isPublished = published;
     }
 }
