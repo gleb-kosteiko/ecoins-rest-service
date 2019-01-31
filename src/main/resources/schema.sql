@@ -19,11 +19,3 @@ create table publication (
     is_published boolean not null,
     primary key (id),
     constraint fk_publication_user_id foreign key (user_id) references user (id) on delete cascade);
-
-drop table if exists user_config;
-create table user_config (
-    id char(32) not null,
-    user_id char(32) not null,
-    cron_schedule varchar(255),
-    primary key (id),
-    constraint fk_user_config_user_id foreign key (user_id) references user (id) on delete cascade);

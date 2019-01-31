@@ -3,8 +3,6 @@ package com.edmunds.ecoins.restservice.service.impl;
 import com.edmunds.ecoins.restservice.model.LoginUser;
 import com.edmunds.ecoins.restservice.model.Role;
 import com.edmunds.ecoins.restservice.model.User;
-import com.edmunds.ecoins.restservice.model.UserConfig;
-import com.edmunds.ecoins.restservice.repository.UserConfigRepository;
 import com.edmunds.ecoins.restservice.repository.UserRepository;
 import com.edmunds.ecoins.restservice.service.UserService;
 import com.google.common.collect.Sets;
@@ -25,8 +23,6 @@ import static com.edmunds.ecoins.restservice.util.Constants.DEFAULT_CRON_SCHEDUL
 public class UserServiceImpl implements UserDetailsService, UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private UserConfigRepository userConfigRepository;
     @Autowired
     private BCryptPasswordEncoder bcryptEncoder;
 
@@ -79,11 +75,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         newUser.setRole(Role.USER);
         newUser.setCoinsCount(0);
         newUser = userRepository.save(newUser);
-
-        UserConfig userConfig = new UserConfig();
-        userConfig.setUserId(newUser.getId());
-        userConfig.setCronSchedule(DEFAULT_CRON_SCHEDULE);
-        userConfigRepository.save(userConfig);
         return newUser;
     }
 
