@@ -1,6 +1,8 @@
 package com.edmunds.ecoins.restservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
+
+import static com.edmunds.ecoins.restservice.util.Constants.DEFAULT_DATE_TIME_FORMAT;
 
 @Entity
 public class Publication {
@@ -21,13 +26,21 @@ public class Publication {
     @Column
     @NotBlank
     @Size (min = 1)
-    private String message;
+    private String text;
     @Column
     @NotBlank
     @Size (min = 1)
     private String title;
     @Column
     private boolean isPublished;
+    @Column
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
+    private LocalDateTime createdDate;
+    @Column
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
+    private LocalDateTime updatedDate;
 
     public String getId() {
         return id;
@@ -45,12 +58,12 @@ public class Publication {
         this.userId = userId;
     }
 
-    public String getMessage() {
-        return message;
+    public String getText() {
+        return text;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getTitle() {
@@ -67,5 +80,21 @@ public class Publication {
 
     public void setPublished(boolean published) {
         isPublished = published;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public LocalDateTime getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(LocalDateTime updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }

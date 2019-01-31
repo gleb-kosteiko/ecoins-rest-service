@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
-import static com.edmunds.ecoins.restservice.util.Constants.DEFAULT_CRON_SCHEDULE;
-
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
     @Autowired

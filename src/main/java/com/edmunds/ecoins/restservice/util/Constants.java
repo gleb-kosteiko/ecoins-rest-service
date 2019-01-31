@@ -7,5 +7,5 @@ public class Constants {
     public static final String HEADER_STRING = "Authorization";
     public static final String AUTHORITIES_KEY = "scopes";
 
-    public static final String DEFAULT_CRON_SCHEDULE = "0 0 1-3 * * *";
+    public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm";
 }
