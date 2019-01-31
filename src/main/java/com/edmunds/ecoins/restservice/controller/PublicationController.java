@@ -81,9 +81,11 @@ public class PublicationController {
                                          Principal principal,
                                          @Valid @RequestBody Publication publication) {
         Publication oldPublication = publicationService.findById(id);
-        oldPublication.setMessage(publication.getMessage());
+        oldPublication.setText(publication.getText());
         oldPublication.setTitle(publication.getTitle());
         oldPublication.setPublished(publication.isPublished());
+        oldPublication.setCreatedDate(publication.getCreatedDate());
+        oldPublication.setUpdatedDate(publication.getUpdatedDate());
         return publicationService.save(oldPublication);
     }
 }

@@ -13,9 +13,11 @@ create table user (
 drop table if exists publication;
 create table publication (
     id char(32) not null,
-    message varchar(255),
+    text text,
     user_id char(32) not null,
     title varchar(255),
     is_published boolean not null,
+    created_date timestamp,
+    updated_date timestamp,
     primary key (id),
     constraint fk_publication_user_id foreign key (user_id) references user (id) on delete cascade);
