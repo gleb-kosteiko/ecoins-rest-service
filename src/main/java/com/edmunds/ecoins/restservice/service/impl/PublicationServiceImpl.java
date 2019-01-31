@@ -44,6 +44,20 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
     @Override
+    public void incrementRating(String publicationId) {
+        Publication publication = findById(publicationId);
+        publication.setRating(publication.getRating() + 1);
+        save(publication);
+    }
+
+    @Override
+    public void decrementRating(String publicationId) {
+        Publication publication = findById(publicationId);
+        publication.setRating(publication.getRating() - 1);
+        save(publication);
+    }
+
+    @Override
     public void delete(String id) {
         publicationRepository.deleteById(id);
     }
