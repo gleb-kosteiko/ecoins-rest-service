@@ -24,8 +24,18 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
     @Override
+    public List<Publication> getAllPublishedPublications() {
+        return publicationRepository.getAllPublishedPublications();
+    }
+
+    @Override
     public List<Publication> findAllForUser(String userId) {
         return publicationRepository.findByUserId(userId);
+    }
+
+    @Override
+    public List<Publication> findFilteredForUser(String userId, boolean published) {
+        return publicationRepository.findFilteredForUser(userId, published);
     }
 
     @Override

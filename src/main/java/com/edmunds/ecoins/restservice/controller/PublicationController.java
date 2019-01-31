@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -29,16 +30,32 @@ public class PublicationController {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<Publication> getAllPublications() {
-        return publicationService.findAll();
+    //todo implement filters
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @RequestMapping(value="/published", method = RequestMethod.GET)
+    public List<Publication> getAllPublished(Principal principal) {
+        return publicationService.getAllPublishedPublications();
     }
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
-    public List<Publication> getAllUserPublications(Principal principal) {
-        return publicationService.findAllForUser(userService.findByUsername(principal.getName()).getId());
+    public List<Publication> getUserPublications(
+            @RequestParam(name = "userid", required = true) String userId,
+            @RequestParam(name = "published", required = false) Boolean published,
+            Principal principal) {
+        //todo show draft publication only owner or admin, show published publication to all
+        if (published != null) {
+            return publicationService.findFilteredForUser(userId, published);
+        }
+        return publicationService.findAllForUser(userId);
+    }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @RequestMapping(method = RequestMethod.POST)
+    public Publication createPublication(@Valid @RequestBody Publication publication,
+                                         Principal principal) {
+        publication.setUserId(userService.findByUsername(principal.getName()).getId());
+        return publicationService.save(publication);
     }
 
     @PublicationValid
@@ -57,14 +74,6 @@ public class PublicationController {
         publicationService.delete(id);
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    @RequestMapping(method = RequestMethod.POST)
-    public Publication createPublication(@Valid @RequestBody Publication publication,
-                                         Principal principal) {
-        publication.setUserId(userService.findByUsername(principal.getName()).getId());
-        return publicationService.save(publication);
-    }
-
     @PublicationValid
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -73,6 +82,8 @@ public class PublicationController {
                                          @Valid @RequestBody Publication publication) {
         Publication oldPublication = publicationService.findById(id);
         oldPublication.setMessage(publication.getMessage());
+        oldPublication.setTitle(publication.getTitle());
+        oldPublication.setPublished(publication.isPublished());
         return publicationService.save(oldPublication);
     }
 }

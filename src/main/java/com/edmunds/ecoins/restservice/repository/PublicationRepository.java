@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PublicationRepository extends CrudRepository<Publication, String> {
+public interface PublicationRepository extends CrudRepository<Publication, String>, PublicationRepositoryCustom {
 
     List<Publication> findByUserId(String userId);
 }

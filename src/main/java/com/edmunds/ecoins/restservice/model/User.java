@@ -29,7 +29,7 @@ public class User {
     @Column
     private String city;
     @Column
-    private Integer coinsCount;
+    private int coinsCount;
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -82,11 +82,11 @@ public class User {
         this.city = city;
     }
 
-    public Integer getCoinsCount() {
+    public int getCoinsCount() {
         return coinsCount;
     }
 
-    public void setCoinsCount(Integer coinsCount) {
+    public void setCoinsCount(int coinsCount) {
         this.coinsCount = coinsCount;
     }
 

@@ -1,6 +1,5 @@
 package com.edmunds.ecoins.restservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -18,12 +17,17 @@ public class Publication {
     @GenericGenerator(name = "uuid", strategy = "uuid")
     private String id;
     @Column
-    @JsonIgnore
     private String userId;
     @Column
     @NotBlank
-    @Size (min = 1, max = 280)
+    @Size (min = 1)
     private String message;
+    @Column
+    @NotBlank
+    @Size (min = 1)
+    private String title;
+    @Column
+    private boolean isPublished;
 
     public String getId() {
         return id;
@@ -47,5 +51,21 @@ public class Publication {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isPublished() {
+        return isPublished;
+    }
+
+    public void setPublished(boolean published) {
+        isPublished = published;
     }
 }
