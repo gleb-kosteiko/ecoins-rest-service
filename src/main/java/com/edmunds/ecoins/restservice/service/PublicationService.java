@@ -12,5 +12,7 @@ public interface PublicationService {
     List<Publication> findAllForUser(String userId);
     List<Publication> findFilteredForUser(String userId, boolean published);
     Publication findById(String id);
+    void incrementRating(String publicationId);
+    void decrementRating(String publicationId);
     void delete(String id);
 }

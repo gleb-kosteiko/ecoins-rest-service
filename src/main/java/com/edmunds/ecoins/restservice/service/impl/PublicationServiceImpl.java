@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service(value = "publicationService")
+@Service("publicationService")
 public class PublicationServiceImpl implements PublicationService {
     @Autowired
     private PublicationRepository publicationRepository;
@@ -41,6 +41,20 @@ public class PublicationServiceImpl implements PublicationService {
     @Override
     public Publication findById(String id) {
         return publicationRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void incrementRating(String publicationId) {
+        Publication publication = findById(publicationId);
+        publication.setRating(publication.getRating() + 1);
+        save(publication);
+    }
+
+    @Override
+    public void decrementRating(String publicationId) {
+        Publication publication = findById(publicationId);
+        publication.setRating(publication.getRating() - 1);
+        save(publication);
     }
 
     @Override

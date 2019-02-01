@@ -19,5 +19,12 @@ create table publication (
     is_published boolean not null,
     created_date timestamp,
     updated_date timestamp,
+    rating int,
     primary key (id),
     constraint fk_publication_user_id foreign key (user_id) references user (id) on delete cascade);
+
+drop table if exists publication_vote;
+create table publication_vote (
+    user_id char(32) not null,
+    publication_id char(32) not null,
+    primary key (user_id, publication_id));

@@ -41,6 +41,8 @@ public class Publication {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
     private LocalDateTime updatedDate;
+    @Column
+    private int rating;
 
     public String getId() {
         return id;
@@ -96,5 +98,13 @@ public class Publication {
 
     public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }
