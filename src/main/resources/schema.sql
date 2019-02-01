@@ -27,7 +27,4 @@ drop table if exists publication_vote;
 create table publication_vote (
     user_id char(32) not null,
     publication_id char(32) not null,
-    is_upvote boolean not null,
-    primary key (user_id, publication_id),
-    constraint fk_publication_vote_user_id foreign key (user_id) references user (id) on delete cascade,
-    constraint fk_publication_vote_publication_id foreign key (publication_id) references publication (id) on delete cascade);
+    primary key (user_id, publication_id));

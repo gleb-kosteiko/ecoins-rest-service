@@ -6,5 +6,7 @@ public interface PublicationVoteService {
 
     boolean vote(PublicationVote vote);
 
+    boolean unvote(PublicationVote vote);
+
     PublicationVote findVote(String userId, String publicationId);
 }

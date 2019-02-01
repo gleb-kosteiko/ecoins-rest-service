@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service(value = "publicationVoteService")
+@Service("publicationVoteService")
 public class PublicationVoteServiceImpl implements PublicationVoteService {
     @Autowired
     private PublicationVoteRepository publicationVoteRepository;
@@ -21,25 +21,21 @@ public class PublicationVoteServiceImpl implements PublicationVoteService {
     public boolean vote(PublicationVote vote) {
         Optional<PublicationVote> savedVoteOpt = publicationVoteRepository.findById(vote.getPublicationVoteId());
         if (savedVoteOpt.isPresent()) {
-            PublicationVote savedVote = savedVoteOpt.get();
-            if (vote.getIsUpvote() == savedVote.getIsUpvote()) {
-                return false;
-            } else {
-                if (savedVote.getIsUpvote()) {
-                    publicationService.decrementRating(vote.getPublicationVoteId().getPublicationId());
-                } else {
-                    publicationService.incrementRating(vote.getPublicationVoteId().getPublicationId());
-                }
-                publicationVoteRepository.delete(savedVote);
-            }
-        } else {
-            publicationVoteRepository.save(vote);
-            if (vote.getIsUpvote()) {
-                publicationService.incrementRating(vote.getPublicationVoteId().getPublicationId());
-            } else {
-                publicationService.decrementRating(vote.getPublicationVoteId().getPublicationId());
-            }
+            return false;
         }
+        publicationVoteRepository.save(vote);
+        publicationService.incrementRating(vote.getPublicationVoteId().getPublicationId());
+        return true;
+    }
+
+    @Override
+    public boolean unvote(PublicationVote vote) {
+        Optional<PublicationVote> savedVoteOpt = publicationVoteRepository.findById(vote.getPublicationVoteId());
+        if (!savedVoteOpt.isPresent()) {
+            return false;
+        }
+        publicationVoteRepository.delete(vote);
+        publicationService.decrementRating(vote.getPublicationVoteId().getPublicationId());
         return true;
     }
 
