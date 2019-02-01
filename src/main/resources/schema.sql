@@ -6,6 +6,7 @@ create table user (
     role char(32),
     email varchar(255),
     city varchar(255),
+    image_url varchar(255),
     country varchar(255),
     coins_count int,
     primary key (id));
