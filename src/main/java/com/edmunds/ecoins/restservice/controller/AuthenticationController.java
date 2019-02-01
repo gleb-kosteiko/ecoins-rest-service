@@ -43,8 +43,8 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<Void> register(@Valid @RequestBody LoginUser user) {
+    public ResponseEntity<User> register(@Valid @RequestBody LoginUser user) {
         User newUser = userService.save(user);
-        return new ResponseEntity<>(newUser != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(newUser, newUser != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 }

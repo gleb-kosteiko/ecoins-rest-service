@@ -29,6 +29,8 @@ public class User {
     @Column
     private String city;
     @Column
+    private String imageUrl;
+    @Column
     private int coinsCount;
     @Column
     @Enumerated(EnumType.STRING)
@@ -80,6 +82,14 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getCoinsCount() {

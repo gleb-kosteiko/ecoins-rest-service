@@ -15,7 +15,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 @RequestMapping("/users")
 public class UserController {
     @Autowired
