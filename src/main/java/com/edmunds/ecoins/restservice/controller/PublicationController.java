@@ -3,6 +3,7 @@ package com.edmunds.ecoins.restservice.controller;
 import com.edmunds.ecoins.restservice.model.Publication;
 import com.edmunds.ecoins.restservice.service.PublicationService;
 import com.edmunds.ecoins.restservice.service.UserService;
+import com.edmunds.ecoins.restservice.validation.PublicationReadAllowed;
 import com.edmunds.ecoins.restservice.validation.PublicationValid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,8 +31,6 @@ public class PublicationController {
     @Autowired
     private UserService userService;
 
-    //todo implement filters
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(value="/published", method = RequestMethod.GET)
     public List<Publication> getAllPublished(Principal principal) {
         return publicationService.getAllPublishedPublications();
@@ -58,8 +57,7 @@ public class PublicationController {
         return publicationService.save(publication);
     }
 
-    @PublicationValid
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PublicationReadAllowed
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Publication getPublication(@PathVariable(value = "id") String id,
                                       Principal principal) {
