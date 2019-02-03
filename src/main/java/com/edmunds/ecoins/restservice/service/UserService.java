@@ -10,6 +10,7 @@ public interface UserService {
     List<User> findAll();
     void delete(String id);
     User update(User user);
+    void addCoins(String id, int coinsCount);
     User findByUsername(String username);
     User findById(String id);
 }
