@@ -1,6 +1,5 @@
 package com.edmunds.ecoins.restservice.service.impl;
 
-import com.edmunds.ecoins.restservice.model.LoginUser;
 import com.edmunds.ecoins.restservice.model.Role;
 import com.edmunds.ecoins.restservice.model.SighUpUser;
 import com.edmunds.ecoins.restservice.model.User;
@@ -50,6 +49,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public User update(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public void addCoins(String id, int coinsCount) {
+        User user = this.findById(id);
+
+        user.setCoinsCount(user.getCoinsCount() + coinsCount);
+
+        userRepository.save(user);
     }
 
     @Override
