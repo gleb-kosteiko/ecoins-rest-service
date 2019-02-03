@@ -11,16 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 @RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getAll() {
         return userService.findAll();
@@ -31,11 +33,23 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public User update(@RequestBody User user) {
-        return userService.update(user);
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public User update(@NotBlank @PathVariable("id") String id,
+                       @Valid @RequestBody User user) {
+        User existingUser = userService.findById(id);
+        existingUser.setUsername(user.getUsername());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setCity(user.getCity());
+        existingUser.setCountry(user.getCountry());
+        existingUser.setImageUrl(user.getImageUrl());
+        existingUser.setRole(user.getRole());
+        existingUser.setCoinsCount(user.getCoinsCount());
+
+        return userService.update(existingUser);
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable(value = "id") String id) {
         userService.delete(id);

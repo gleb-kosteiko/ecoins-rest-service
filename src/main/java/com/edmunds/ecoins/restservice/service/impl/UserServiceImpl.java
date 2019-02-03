@@ -48,10 +48,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public User update(User user) {
-        if (user.getEncryptedPassword() != null) {
-            this.encodePassword(user);
-        }
-
         return userRepository.save(user);
     }
 
@@ -74,9 +70,5 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         newUser.setCoinsCount(0);
         newUser = userRepository.save(newUser);
         return newUser;
-    }
-
-    private void encodePassword(User user) {
-        user.setEncryptedPassword(bcryptEncoder.encode(user.getEncryptedPassword()));
     }
 }

@@ -1,6 +1,6 @@
 package com.edmunds.ecoins.restservice.controller;
 
-import com.edmunds.ecoins.restservice.model.AuthToken;
+import com.edmunds.ecoins.restservice.model.LoggedInUserDto;
 import com.edmunds.ecoins.restservice.model.LoginUser;
 import com.edmunds.ecoins.restservice.model.User;
 import com.edmunds.ecoins.restservice.security.TokenProvider;
@@ -39,7 +39,10 @@ public class AuthenticationController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
-        return ResponseEntity.ok(new AuthToken(token));
+
+        User user = userService.findByUsername(loginUser.getUsername());
+
+        return ResponseEntity.ok(new LoggedInUserDto(token, user));
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
