@@ -43,6 +43,10 @@ public class Publication {
     private LocalDateTime updatedDate;
     @Column
     private int rating;
+    @Column
+    private String category;
+    @Column
+    private String imageUrl;
 
     public String getId() {
         return id;
@@ -106,5 +110,21 @@ public class Publication {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

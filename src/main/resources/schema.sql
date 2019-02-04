@@ -21,6 +21,8 @@ create table publication (
     created_date timestamp,
     updated_date timestamp,
     rating int,
+    category varchar(255),
+    image_url varchar(255),
     primary key (id),
     constraint fk_publication_user_id foreign key (user_id) references user (id) on delete cascade);
 
