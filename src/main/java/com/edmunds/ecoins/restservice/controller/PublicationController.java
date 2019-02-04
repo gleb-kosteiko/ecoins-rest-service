@@ -33,7 +33,11 @@ public class PublicationController {
     private UserService userService;
 
     @RequestMapping(value = "/published", method = RequestMethod.GET)
-    public List<Publication> getAllPublished(Principal principal) {
+    public List<Publication> getAllPublished(@RequestParam(name = "category", required = false) String category,
+                                             Principal principal) {
+        if(category != null) {
+            return publicationService.getPublishedPublicationsByCategory(category);
+        }
         return publicationService.getAllPublishedPublications();
     }
 

@@ -33,4 +33,11 @@ public class PublicationRepositoryImpl implements PublicationRepositoryCustom {
         return query.getResultList();
     }
 
+    @Override
+    public List<Publication> getPublishedPublicationsByCategory(String category) {
+        Query query = entityManager.createNativeQuery("SELECT pub.* FROM PUBLICATION as pub WHERE pub.category = :category AND pub.is_published=true", Publication.class);
+        query.setParameter("category", category);
+        return query.getResultList();
+    }
+
 }

@@ -9,6 +9,7 @@ public interface PublicationService {
     Publication save(Publication publication);
     List<Publication> findAll();
     List<Publication> getAllPublishedPublications();
+    List<Publication> getPublishedPublicationsByCategory(String category);
     List<Publication> findAllForUser(String userId);
     List<Publication> findFilteredForUser(String userId, boolean published);
     Publication findById(String id);
