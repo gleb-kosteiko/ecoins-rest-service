@@ -9,4 +9,6 @@ public interface PublicationRepositoryCustom {
     List<Publication> findFilteredForUser(String userId, boolean published);
 
     List<Publication> getAllPublishedPublications();
+
+    List<Publication> getPublishedPublicationsByCategory(String category);
 }

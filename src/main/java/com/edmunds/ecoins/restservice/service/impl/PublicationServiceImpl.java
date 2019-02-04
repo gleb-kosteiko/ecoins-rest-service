@@ -29,6 +29,11 @@ public class PublicationServiceImpl implements PublicationService {
     }
 
     @Override
+    public List<Publication> getPublishedPublicationsByCategory(String category) {
+        return publicationRepository.getPublishedPublicationsByCategory(category);
+    }
+
+    @Override
     public List<Publication> findAllForUser(String userId) {
         return publicationRepository.findByUserId(userId);
     }
