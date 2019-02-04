@@ -5,6 +5,7 @@ import com.edmunds.ecoins.restservice.service.PublicationService;
 import com.edmunds.ecoins.restservice.service.UserService;
 import com.edmunds.ecoins.restservice.validation.PublicationReadAllowed;
 import com.edmunds.ecoins.restservice.validation.PublicationValid;
+import com.edmunds.ecoins.restservice.validation.UserAccessAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -31,18 +32,17 @@ public class PublicationController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value="/published", method = RequestMethod.GET)
+    @RequestMapping(value = "/published", method = RequestMethod.GET)
     public List<Publication> getAllPublished(Principal principal) {
         return publicationService.getAllPublishedPublications();
     }
 
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @UserAccessAllowed
     @RequestMapping(method = RequestMethod.GET)
     public List<Publication> getUserPublications(
             @RequestParam(name = "userid", required = true) String userId,
             @RequestParam(name = "published", required = false) Boolean published,
             Principal principal) {
-        //todo show draft publication only owner or admin, show published publication to all
         if (published != null) {
             return publicationService.findFilteredForUser(userId, published);
         }
