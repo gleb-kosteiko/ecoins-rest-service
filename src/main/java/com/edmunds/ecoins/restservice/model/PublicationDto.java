@@ -7,6 +7,7 @@ public class PublicationDto {
     private String userId;
     private String text;
     private String title;
+    private String subtitle;
     private boolean isPublished;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
@@ -19,6 +20,7 @@ public class PublicationDto {
     public PublicationDto(Publication publication, User user) {
         this.setId(publication.getId());
         this.setTitle(publication.getTitle());
+        this.setSubtitle(publication.getSubtitle());
         this.setText(publication.getText());
         this.setCategory(publication.getCategory());
         this.setCreatedDate(publication.getCreatedDate());
@@ -125,5 +127,13 @@ public class PublicationDto {
 
     public void setUserImageUrl(String userImageUrl) {
         this.userImageUrl = userImageUrl;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 }

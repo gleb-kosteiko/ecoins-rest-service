@@ -32,6 +32,8 @@ public class Publication {
     @Size (min = 1)
     private String title;
     @Column
+    private String subtitle;
+    @Column
     private boolean isPublished;
     @Column
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -126,5 +128,13 @@ public class Publication {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 }
