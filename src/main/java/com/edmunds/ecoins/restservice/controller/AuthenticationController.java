@@ -2,7 +2,7 @@ package com.edmunds.ecoins.restservice.controller;
 
 import com.edmunds.ecoins.restservice.model.LoggedInUserDto;
 import com.edmunds.ecoins.restservice.model.LoginUser;
-import com.edmunds.ecoins.restservice.model.SighUpUser;
+import com.edmunds.ecoins.restservice.model.SignUpUser;
 import com.edmunds.ecoins.restservice.model.User;
 import com.edmunds.ecoins.restservice.security.TokenProvider;
 import com.edmunds.ecoins.restservice.service.UserService;
@@ -47,7 +47,7 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<User> register(@Valid @RequestBody SighUpUser user) {
+    public ResponseEntity<User> register(@Valid @RequestBody SignUpUser user) {
         User newUser = userService.save(user);
         return new ResponseEntity<>(newUser, newUser != null ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }

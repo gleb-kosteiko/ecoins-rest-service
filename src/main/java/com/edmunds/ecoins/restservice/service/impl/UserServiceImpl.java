@@ -1,7 +1,7 @@
 package com.edmunds.ecoins.restservice.service.impl;
 
 import com.edmunds.ecoins.restservice.model.Role;
-import com.edmunds.ecoins.restservice.model.SighUpUser;
+import com.edmunds.ecoins.restservice.model.SignUpUser;
 import com.edmunds.ecoins.restservice.model.User;
 import com.edmunds.ecoins.restservice.repository.UserRepository;
 import com.edmunds.ecoins.restservice.service.UserService;
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public User save(SighUpUser user) {
+    public User save(SignUpUser user) {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
