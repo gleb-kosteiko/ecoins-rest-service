@@ -66,6 +66,21 @@ public class UserController {
         if (!Objects.isNull(user.getAbout())) {
             existingUser.setAbout(user.getAbout());
         }
+        if (!Objects.isNull(user.getMake())) {
+            existingUser.setMake(user.getMake());
+        }
+        if (!Objects.isNull(user.getModel())) {
+            existingUser.setModel(user.getModel());
+        }
+        if (!Objects.isNull(user.getYear())) {
+            existingUser.setYear(user.getYear());
+        }
+        if (!Objects.isNull(user.getCarImageUrl())) {
+            existingUser.setCarImageUrl(user.getCarImageUrl());
+        }
+        if (!Objects.isNull(user.getCarDescription())) {
+            existingUser.setCarDescription(user.getCarDescription());
+        }
 
         return userService.update(existingUser);
     }

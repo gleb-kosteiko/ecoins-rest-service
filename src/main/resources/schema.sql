@@ -9,9 +9,14 @@ create table user (
     role char(32),
     email varchar(255),
     city varchar(255),
-    image_url varchar(255),
+    image_url varchar(1000),
     country varchar(255),
     coins_count int,
+    make varchar(255),
+    model varchar(255),
+    year varchar(255),
+    car_image_url varchar(1000),
+    car_description varchar(2000),
     primary key (id));
 
 drop table if exists publication;
@@ -26,7 +31,7 @@ create table publication (
     updated_date timestamp,
     rating int,
     category varchar(255),
-    image_url varchar(255),
+    image_url varchar(1000),
     primary key (id),
     constraint fk_publication_user_id foreign key (user_id) references user (id) on delete cascade);
 
