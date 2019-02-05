@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -32,9 +33,10 @@ public class Publication {
     @Size (min = 1)
     private String title;
     @Column
-    private String subtitle;
+    private String subtitle = "";
     @Column
-    private boolean isPublished;
+    @NotNull
+    private Boolean isPublished;
     @Column
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
@@ -46,9 +48,9 @@ public class Publication {
     @Column
     private int rating;
     @Column
-    private String category;
+    private String category = "";
     @Column
-    private String imageUrl;
+    private String imageUrl = "";
 
     public String getId() {
         return id;
@@ -82,12 +84,12 @@ public class Publication {
         this.title = title;
     }
 
-    public boolean isPublished() {
+    public Boolean getIsPublished() {
         return isPublished;
     }
 
-    public void setPublished(boolean published) {
-        isPublished = published;
+    public void setIsPublished(Boolean published) {
+        this.isPublished = published;
     }
 
     public LocalDateTime getCreatedDate() {

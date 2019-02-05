@@ -85,14 +85,8 @@ public class PublicationController {
     public Publication updatePublication(@NotBlank @PathVariable(value = "id") String id,
                                          Principal principal,
                                          @Valid @RequestBody Publication publication) {
-        Publication oldPublication = publicationService.findById(id);
-        oldPublication.setText(publication.getText());
-        oldPublication.setTitle(publication.getTitle());
-        oldPublication.setSubtitle(publication.getSubtitle());
-        oldPublication.setPublished(publication.isPublished());
-        oldPublication.setCreatedDate(publication.getCreatedDate());
-        oldPublication.setUpdatedDate(publication.getUpdatedDate());
-        return publicationService.save(oldPublication);
+        publication.setId(id);
+        return publicationService.save(publication);
     }
 
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service("publicationService")
 public class PublicationServiceImpl implements PublicationService {
@@ -15,7 +16,32 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public Publication save(Publication publication) {
-        return publicationRepository.save(publication);
+        if(publication.getId() == null) {
+            return publicationRepository.save(publication);
+        }
+        Publication oldPublication = findById(publication.getId());
+        if (!Objects.isNull(publication.getTitle())) {
+            oldPublication.setTitle(publication.getTitle());
+        }
+        if (!Objects.isNull(publication.getSubtitle())) {
+            oldPublication.setSubtitle(publication.getSubtitle());
+        }
+        if (!Objects.isNull(publication.getCategory())) {
+            oldPublication.setCategory(publication.getCategory());
+        }
+        if (!Objects.isNull(publication.getText())) {
+            oldPublication.setText(publication.getText());
+        }
+        if (!Objects.isNull(publication.getUpdatedDate())) {
+            oldPublication.setUpdatedDate(publication.getUpdatedDate());
+        }
+        if (!Objects.isNull(publication.getImageUrl())) {
+            oldPublication.setImageUrl(publication.getImageUrl());
+        }
+        if (!Objects.isNull(publication.getIsPublished())) {
+            oldPublication.setIsPublished(publication.getIsPublished());
+        }
+        return publicationRepository.save(oldPublication);
     }
 
     @Override
