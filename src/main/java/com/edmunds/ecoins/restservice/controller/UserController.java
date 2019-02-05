@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -38,13 +39,24 @@ public class UserController {
     public User update(@NotBlank @PathVariable("id") String id,
                        @Valid @RequestBody User user) {
         User existingUser = userService.findById(id);
-        existingUser.setUsername(user.getUsername());
-        existingUser.setEmail(user.getEmail());
-        existingUser.setCity(user.getCity());
-        existingUser.setCountry(user.getCountry());
-        existingUser.setImageUrl(user.getImageUrl());
-        existingUser.setRole(user.getRole());
-        existingUser.setCoinsCount(user.getCoinsCount());
+        if (!Objects.isNull(user.getUsername())) {
+            existingUser.setUsername(user.getUsername());
+        }
+        if (!Objects.isNull(user.getEmail())) {
+            existingUser.setEmail(user.getEmail());
+        }
+        if (!Objects.isNull(user.getCity())) {
+            existingUser.setCity(user.getCity());
+        }
+        if (!Objects.isNull(user.getCountry())) {
+            existingUser.setCountry(user.getCountry());
+        }
+        if (!Objects.isNull(user.getImageUrl())) {
+            existingUser.setImageUrl(user.getImageUrl());
+        }
+        if (!Objects.isNull(user.getRole())) {
+            existingUser.setRole(user.getRole());
+        }
 
         return userService.update(existingUser);
     }
