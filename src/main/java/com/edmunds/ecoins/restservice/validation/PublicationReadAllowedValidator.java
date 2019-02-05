@@ -34,7 +34,8 @@ public class PublicationReadAllowedValidator implements ConstraintValidator<Publ
         if (processedPublication == null) {
             throw new NoSuchElementException("{\"error\":\"There is no publication with such ID.\"}");
         }
-        if (processedPublication.isPublished()) {
+        if (processedPublication.getIsPublished() != null
+                && processedPublication.getIsPublished()) {
             return true;
         } else {
             if (principal == null) {

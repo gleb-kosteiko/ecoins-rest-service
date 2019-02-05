@@ -8,7 +8,7 @@ public class PublicationDto {
     private String text;
     private String title;
     private String subtitle;
-    private boolean isPublished;
+    private Boolean isPublished;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
     private int rating;
@@ -27,7 +27,7 @@ public class PublicationDto {
         this.setUpdatedDate(publication.getUpdatedDate());
         this.setImageUrl(publication.getImageUrl());
         this.setUserId(publication.getUserId());
-        this.setIsPublished(publication.isPublished());
+        this.setIsPublished(publication.getIsPublished());
         this.setRating(publication.getRating());
         this.setUserName(user.getUsername());
         this.setUserImageUrl(user.getImageUrl());
@@ -65,11 +65,11 @@ public class PublicationDto {
         this.title = title;
     }
 
-    public boolean getIsPublished() {
+    public Boolean getIsPublished() {
         return isPublished;
     }
 
-    public void setIsPublished(boolean published) {
+    public void setIsPublished(Boolean published) {
         this.isPublished = published;
     }
 
