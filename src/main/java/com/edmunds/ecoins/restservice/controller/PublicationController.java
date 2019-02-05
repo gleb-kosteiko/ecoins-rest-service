@@ -93,6 +93,15 @@ public class PublicationController {
     private List<PublicationDto> populateDtos(List<Publication> publications) {
         return publications.stream()
                 .map(p -> populateDto(p))
+                .sorted((p1, p2) -> {
+                    if (p1.getCreatedDate().isAfter(p2.getCreatedDate())) {
+                        return -1;
+                    } else if (p1.getCreatedDate().isBefore(p1.getCreatedDate())) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                })
                 .collect(Collectors.toList());
     }
 
