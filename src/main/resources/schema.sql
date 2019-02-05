@@ -2,6 +2,9 @@ drop table if exists user;
 create table user (
     id char(32) not null,
     username varchar(255),
+    real_name varchar(255),
+    age int,
+    about varchar(2000),
     encrypted_password varchar(255),
     role char(32),
     email varchar(255),

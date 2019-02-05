@@ -20,6 +20,12 @@ public class User {
     @Column(nullable = false, unique = true, length = 45)
     private String username;
     @Column
+    private String realName;
+    @Column
+    private int age;
+    @Column
+    private String about;
+    @Column
     @JsonIgnore
     private String encryptedPassword;
     @Column
@@ -50,6 +56,30 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public String getEncryptedPassword() {
