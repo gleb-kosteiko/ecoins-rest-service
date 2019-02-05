@@ -1,6 +1,11 @@
 package com.edmunds.ecoins.restservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
+
+import static com.edmunds.ecoins.restservice.util.Constants.DEFAULT_DATE_TIME_FORMAT;
 
 public class PublicationDto {
     private String id;
@@ -9,7 +14,11 @@ public class PublicationDto {
     private String title;
     private String subtitle;
     private Boolean isPublished;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
     private LocalDateTime createdDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
     private LocalDateTime updatedDate;
     private int rating;
     private String category;
