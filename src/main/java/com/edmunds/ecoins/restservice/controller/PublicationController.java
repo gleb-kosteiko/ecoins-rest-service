@@ -1,6 +1,8 @@
 package com.edmunds.ecoins.restservice.controller;
 
 import com.edmunds.ecoins.restservice.model.Publication;
+import com.edmunds.ecoins.restservice.model.PublicationDto;
+import com.edmunds.ecoins.restservice.model.User;
 import com.edmunds.ecoins.restservice.service.PublicationService;
 import com.edmunds.ecoins.restservice.service.UserService;
 import com.edmunds.ecoins.restservice.validation.PublicationReadAllowed;
@@ -21,6 +23,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -33,24 +36,24 @@ public class PublicationController {
     private UserService userService;
 
     @RequestMapping(value = "/published", method = RequestMethod.GET)
-    public List<Publication> getAllPublished(@RequestParam(name = "category", required = false) String category,
-                                             Principal principal) {
-        if(category != null) {
-            return publicationService.getPublishedPublicationsByCategory(category);
+    public List<PublicationDto> getAllPublished(@RequestParam(name = "category", required = false) String category,
+                                                Principal principal) {
+        if (category != null) {
+            return populateDtos(publicationService.getPublishedPublicationsByCategory(category));
         }
-        return publicationService.getAllPublishedPublications();
+        return populateDtos(publicationService.getAllPublishedPublications());
     }
 
     @UserAccessAllowed
     @RequestMapping(method = RequestMethod.GET)
-    public List<Publication> getUserPublications(
+    public List<PublicationDto> getUserPublications(
             @RequestParam(name = "userid", required = true) String userId,
             @RequestParam(name = "published", required = false) Boolean published,
             Principal principal) {
         if (published != null) {
-            return publicationService.findFilteredForUser(userId, published);
+            return populateDtos(publicationService.findFilteredForUser(userId, published));
         }
-        return publicationService.findAllForUser(userId);
+        return populateDtos(publicationService.findAllForUser(userId));
     }
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -63,9 +66,9 @@ public class PublicationController {
 
     @PublicationReadAllowed
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Publication getPublication(@PathVariable(value = "id") String id,
-                                      Principal principal) {
-        return publicationService.findById(id);
+    public PublicationDto getPublication(@PathVariable(value = "id") String id,
+                                         Principal principal) {
+        return populateDto(publicationService.findById(id));
     }
 
     @PublicationValid
@@ -89,5 +92,17 @@ public class PublicationController {
         oldPublication.setCreatedDate(publication.getCreatedDate());
         oldPublication.setUpdatedDate(publication.getUpdatedDate());
         return publicationService.save(oldPublication);
+    }
+
+
+    private List<PublicationDto> populateDtos(List<Publication> publications) {
+        return publications.stream()
+                .map(p -> populateDto(p))
+                .collect(Collectors.toList());
+    }
+
+    private PublicationDto populateDto(Publication publication) {
+        User user = userService.findById(publication.getUserId());
+        return new PublicationDto(publication, user);
     }
 }
