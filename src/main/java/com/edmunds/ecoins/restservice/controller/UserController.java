@@ -57,6 +57,15 @@ public class UserController {
         if (!Objects.isNull(user.getRole())) {
             existingUser.setRole(user.getRole());
         }
+        if (!Objects.isNull(user.getRealName())) {
+            existingUser.setRealName(user.getRealName());
+        }
+        if (user.getAge() != 0) {
+            existingUser.setAge(user.getAge());
+        }
+        if (!Objects.isNull(user.getAbout())) {
+            existingUser.setAbout(user.getAbout());
+        }
 
         return userService.update(existingUser);
     }
