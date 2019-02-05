@@ -17,6 +17,7 @@ create table publication (
     text text,
     user_id char(32) not null,
     title varchar(255),
+    subtitle varchar(255),
     is_published boolean not null,
     created_date timestamp,
     updated_date timestamp,

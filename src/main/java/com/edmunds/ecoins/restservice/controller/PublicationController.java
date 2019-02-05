@@ -88,6 +88,7 @@ public class PublicationController {
         Publication oldPublication = publicationService.findById(id);
         oldPublication.setText(publication.getText());
         oldPublication.setTitle(publication.getTitle());
+        oldPublication.setSubtitle(publication.getSubtitle());
         oldPublication.setPublished(publication.isPublished());
         oldPublication.setCreatedDate(publication.getCreatedDate());
         oldPublication.setUpdatedDate(publication.getUpdatedDate());
