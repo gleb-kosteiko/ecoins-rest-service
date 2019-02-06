@@ -15,7 +15,7 @@ create table user (
     make varchar(255),
     model varchar(255),
     year varchar(255),
-    car_image_url varchar(1000),
+    car_image_url varchar(2000),
     car_description varchar(2000),
     primary key (id));
 
