@@ -24,14 +24,14 @@ create table publication (
     id char(32) not null,
     text text,
     user_id char(32) not null,
-    title varchar(255),
-    subtitle varchar(255),
+    title varchar(2000),
+    subtitle varchar(2000),
     is_published boolean not null,
     created_date timestamp,
     updated_date timestamp,
     rating int,
     category varchar(255),
-    image_url varchar(1000),
+    image_url varchar(2000),
     primary key (id),
     constraint fk_publication_user_id foreign key (user_id) references user (id) on delete cascade);
 
