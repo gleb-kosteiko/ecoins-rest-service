@@ -17,4 +17,4 @@ http://localhost:8080/api/swagger-ui.html
 https://ecoins-rest.herokuapp.com/api/swagger-ui.html
 
 ## H2 database host:
-http://51.15.214.126:8082
+http://212.47.231.68:8082
